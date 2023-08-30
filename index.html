@@ -4,9 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>openai-demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css" />
+
+    <style>
+      body {
+        background-color: #f1f1f1;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      #app {
+        margin: 0 auto;
+        width: 500px;
+      }
+
+      .section {
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        background-color: #fff;
+      }
+
+      .ask {
+        background-color: #5259f6;
+        color: #fff;
+      }
+
+      .answer {
+        max-height: 500px;
+        overflow: auto;
+      }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <h1>请求 openai api 的简单 demo</h1>
+
+      <p>简单模拟 ChatGPT。</p>
+
+      <section class="ask section">linux 怎么检测网速？</section>
+
+      <section class="answer section">...</section>
+    </div>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

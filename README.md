@@ -1,4 +1,4 @@
-# 大陆请求 openai api 的简单 demo
+# 请求 openai api 的简单 demo
 
 原理如下：
 

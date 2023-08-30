@@ -1,20 +1,44 @@
-import axios from 'axios';
+import { fetchEventSource } from '@microsoft/fetch-event-source';
+import MarkdownIt from 'markdown-it';
 import { OPENAI_CONFIG } from './constants';
 
-getModels();
+const md = new MarkdownIt();
 
-async function getModels() {
-  try {
-    const res = await axios.get(`${OPENAI_CONFIG.base}/v1/models`);
+const askDom = document.querySelector('.ask');
+const answerDom = document.querySelector('.answer');
 
-    setContent(JSON.stringify(res.data, null, 2));
-  } catch (error) {
-    setContent('error => ', error.toString());
+const url = `${OPENAI_CONFIG.base}/v1/chat/completions`;
+
+let resText = '';
+
+await fetchEventSource(url, {
+  method: 'POST',
+
+  headers: {
+    'Content-Type': 'application/json'
+  },
+
+  body: JSON.stringify({
+    messages: [{ role: 'user', content: askDom.innerText }],
+    model: 'gpt-3.5-turbo',
+    stream: true
+  }),
+
+  onmessage(ev) {
+    if (ev.data === '[DONE]') {
+      console.log(`完整回答为：\n${resText}`);
+      return;
+    }
+
+    const data = JSON.parse(ev.data);
+    const { choices } = data;
+
+    const arr = choices.filter((item) => item.finish_reason !== 'stop');
+
+    arr.forEach((item) => {
+      resText += item.delta.content;
+    });
+
+    answerDom.innerHTML = md.render(resText);
   }
-}
-
-function setContent(data) {
-  const pre = document.createElement('pre');
-  pre.innerHTML = data;
-  document.getElementById('app').appendChild(pre);
-}
+});
