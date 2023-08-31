@@ -1,8 +1,23 @@
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 import MarkdownIt from 'markdown-it';
+import mdhljs from 'markdown-it-highlightjs';
+import hljs from 'highlight.js';
+import 'highlight.js/styles/github-dark.css';
 import { OPENAI_CONFIG } from './constants';
 
-const md = new MarkdownIt();
+const md = new MarkdownIt({
+  highlight(str, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return '<pre class="hljs"><code>' + hljs.highlight(lang, str, true).value + '</code></pre>';
+      } catch (__) {}
+    }
+
+    return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
+  }
+});
+
+md.use(mdhljs);
 
 const askDom = document.querySelector('.ask');
 const answerDom = document.querySelector('.answer');
