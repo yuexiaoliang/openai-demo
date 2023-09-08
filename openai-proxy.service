@@ -1,0 +1,12 @@
+[Unit]
+Description=openaip proxy
+After=network.target
+
+[Service]
+ExecStart=/root/.nvm/versions/node/v16.14.2/bin/node /root/scripts/openai-proxy/remote-proxy.js
+WorkingDirectory=/root/scripts/openai-proxy
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target

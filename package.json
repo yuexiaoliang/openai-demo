@@ -17,6 +17,7 @@
     "http-proxy-middleware": "^2.0.6",
     "markdown-it": "^13.0.1",
     "markdown-it-highlightjs": "^4.0.1",
-    "socks-proxy-agent": "^7.0.0"
+    "socks-proxy-agent": "^7.0.0",
+    "winston": "^3.10.0"
   }
 }
