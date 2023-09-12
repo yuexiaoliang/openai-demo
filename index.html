@@ -38,6 +38,25 @@
         max-height: 500px;
         overflow: auto;
       }
+
+      .images {
+        display: none;
+        width: 100%;
+        padding: 5px;
+        background-color: #fff;
+        box-sizing: border-box;
+      }
+
+      .images img {
+        display: block;
+        margin-bottom: 5px;
+        width: 100%;
+        border-radius: 5px;
+      }
+
+      .images img:last-child {
+        margin-bottom: 0;
+      }
     </style>
   </head>
   <body>
@@ -49,6 +68,8 @@
       <section class="ask section">获取div的各类高度</section>
 
       <section class="answer section">...</section>
+
+      <section class="images section"></section>
     </div>
     <script type="module" src="/main.js"></script>
   </body>
