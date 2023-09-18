@@ -61,16 +61,32 @@
   </head>
   <body>
     <div id="app">
-      <h1>请求 openai api 的简单 demo</h1>
+      <h1>对接 OpenAI API 的示例</h1>
 
-      <p>简单模拟 ChatGPT。</p>
-
-      <section class="ask section">获取div的各类高度</section>
-
+      <h2>聊天</h2>
+      <section class="ask section">怎么获取div的各类高度</section>
       <section class="answer section">...</section>
 
-      <section class="images section"></section>
+      <h2>图像生成</h2>
+      <section class="images images-gen section"></section>
+
+      <h2>图像编辑</h2>
+      <input type="text" id="file-edit-input" placeholder="Prompt..." value="绚烂的霓虹中包含了一只白色的猫" />
+      <!-- static/edit.png -->
+      <input type="file" id="file-edit-upload" />
+      <p>原图</p>
+      <section class="images images-edit-old section"></section>
+      <p>新图</p>
+      <section class="images images-edit-new section"></section>
+
+      <h2>图像变体</h2>
+      <input type="file" id="file-variation-upload" />
+      <p>原图</p>
+      <section class="images images-variations-old section"></section>
+      <p>新图</p>
+      <section class="images images-variations-new section"></section>
     </div>
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>

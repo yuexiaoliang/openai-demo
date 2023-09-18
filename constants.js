@@ -1,8 +1,4 @@
 export const OPENAI_CONFIG = {
-  // openai 的 api_key
-  // 生成地址：https://platform.openai.com/account/api-keys
-  api_key: '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',
-
   // openai api 的 host，不用修改
   host: 'https://api.openai.com',
 
