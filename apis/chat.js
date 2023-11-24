@@ -1,14 +1,24 @@
 import { fetchEventSource } from '@microsoft/fetch-event-source';
+import http from '../request'
 
-import createMD from '../md';
 import { OPENAI_CONFIG } from '../constants';
 
-const md = createMD();
+export async function startChatNoStream(value, call, model = 'gpt-3.5-turbo') {
+  const { data } = await http.post(`/v1/chat/completions`, {
+    messages: [{ role: 'user', content: value }],
+    model,
+    max_tokens: 4096
+  });
 
-export async function startChat() {
-  const askDom = document.querySelector('.ask');
-  const answerDom = document.querySelector('.answer');
+  const { choices } = data;
+  const [{ message }] = choices
 
+  call & call(message.content)
+
+  return res
+}
+
+export async function startChat(value, call, model = 'gpt-3.5-turbo') {
   const url = `${OPENAI_CONFIG.base}/v1/chat/completions`;
 
   let resText = '';
@@ -20,10 +30,8 @@ export async function startChat() {
     },
 
     body: JSON.stringify({
-      messages: [{ role: 'user', content: askDom.innerText }],
-      // model: 'gpt-3.5-turbo',
-
-      model: 'ft:gpt-3.5-turbo-0613:yuexiaoliang::7yH93UEm',
+      messages: [{ role: 'user', content: value }],
+      model,
       stream: true
     }),
 
@@ -39,10 +47,10 @@ export async function startChat() {
       const arr = choices.filter((item) => item.finish_reason !== 'stop');
 
       arr.forEach((item) => {
-        resText += item.delta.content;
+        if (item.delta.content) resText += item.delta.content;
       });
 
-      answerDom.innerHTML = md.render(resText);
+      call & call(resText)
     }
   });
 }

@@ -1,92 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>openai-demo</title>
 
-    <style>
-      body {
-        background-color: #f1f1f1;
-        font-size: 14px;
-        line-height: 1.6;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>openai-demo</title>
+</head>
 
-      pre {
-        border-radius: 5px;
-        overflow: hidden;
-      }
+<body>
+  <div id="app">
+    <h1 class="app-title">对接 OpenAI API 的示例</h1>
 
-      #app {
-        margin: 0 auto;
-        width: 500px;
-      }
+    <div class="card" data-action="chat">
+      <header class="card-header">
+        <h2 class="card-header-title">聊天</h2>
+        <div class="card-header-right">
+          <button class="run">发送</button>
+        </div>
+      </header>
 
-      .section {
-        padding: 20px;
-        margin-bottom: 20px;
-        border-radius: 10px;
-        background-color: #fff;
-      }
-
-      .ask {
-        background-color: #5259f6;
-        color: #fff;
-      }
-
-      .answer {
-        max-height: 500px;
-        overflow: auto;
-      }
-
-      .images {
-        display: none;
-        width: 100%;
-        padding: 5px;
-        background-color: #fff;
-        box-sizing: border-box;
-      }
-
-      .images img {
-        display: block;
-        margin-bottom: 5px;
-        width: 100%;
-        border-radius: 5px;
-      }
-
-      .images img:last-child {
-        margin-bottom: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="app">
-      <h1>对接 OpenAI API 的示例</h1>
-
-      <h2>聊天</h2>
-      <section class="ask section">怎么获取div的各类高度</section>
-      <section class="answer section">...</section>
-
-      <h2>图像生成</h2>
-      <section class="images images-gen section"></section>
-
-      <h2>图像编辑</h2>
-      <input type="text" id="file-edit-input" placeholder="Prompt..." value="绚烂的霓虹中包含了一只白色的猫" />
-      <!-- static/edit.png -->
-      <input type="file" id="file-edit-upload" />
-      <p>原图</p>
-      <section class="images images-edit-old section"></section>
-      <p>新图</p>
-      <section class="images images-edit-new section"></section>
-
-      <h2>图像变体</h2>
-      <input type="file" id="file-variation-upload" />
-      <p>原图</p>
-      <section class="images images-variations-old section"></section>
-      <p>新图</p>
-      <section class="images images-variations-new section"></section>
+      <textarea class="value" rows="4" placeholder="请输入...">你好，你叫什么名字？</textarea>
+      <div class="reply"></div>
     </div>
 
-    <script type="module" src="/main.js"></script>
-  </body>
+    <div class="card" data-action="chat-vision">
+      <header class="card-header">
+        <h2 class="card-header-title">视觉</h2>
+        <div class="card-header-right">
+          <button class="run">发送</button>
+        </div>
+      </header>
+
+      <textarea class="value" rows="4" placeholder="请输入...">You are proficient in Prompt engineering, especially in the field of image generation. Please write a Prompt based on this image and only respond to the Prompt.</textarea>
+      <div class="reply"></div>
+
+      <h3 class="sub-title">原图</h3>
+      <input type="file" accept="image/png,image/jpeg" class="file-input" />
+      <div class="upload-images"></div>
+    </div>
+
+    <div class="card" data-action="audio-speech">
+      <header class="card-header">
+        <h2 class="card-header-title">文本转音频</h2>
+        <div class="card-header-right">
+          <button class="run">转换</button>
+        </div>
+      </header>
+
+      <textarea class="value" rows="4" placeholder="请输入...">少而好学，如日出之阳；壮而好学，如日中之光；老而好学，如炳烛之明。</textarea>
+      <div class="reply"></div>
+    </div>
+
+    <div class="card" data-action="image-generate">
+      <header class="card-header">
+        <h2 class="card-header-title">图像生成</h2>
+        <div class="card-header-right">
+          <button class="run">生成</button>
+        </div>
+      </header>
+
+      <textarea class="value" rows="4" placeholder="请输入...">一只白色的猫咪趴在一只黑色的大狗背上</textarea>
+      <div class="reply"></div>
+    </div>
+
+    <div class="card" data-action="image-variation">
+      <header class="card-header">
+        <h2 class="card-header-title">图像变体</h2>
+        <div class="card-header-right">
+          <button class="run">运行</button>
+        </div>
+      </header>
+
+      <h3 class="sub-title">原图</h3>
+      <input type="file" accept="image/png" class="file-input" />
+      <div class="upload-images"></div>
+
+      <hr />
+
+      <h3 class="sub-title">新图</h3>
+      <div class="reply"></div>
+    </div>
+
+    <div class="card" data-action="image-edit">
+      <header class="card-header">
+        <h2 class="card-header-title">图像编辑</h2>
+        <div class="card-header-right">
+          <button class="run">运行</button>
+        </div>
+      </header>
+
+      <textarea class="value" rows="4" placeholder="请输入...">绚烂的霓虹中包含了一只白色的猫</textarea>
+
+      <hr />
+
+
+      <h3 class="sub-title">原图</h3>
+      <input type="file" accept="image/png" class="file-input" />
+      <p class="remark">示例文件地址：<code>`/static/edit.png</code></p>
+
+      <hr />
+
+      <div class="upload-images"></div>
+
+      <h3 class="sub-title">新图</h>
+        <div class="reply"></div>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>

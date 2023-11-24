@@ -1,0 +1,139 @@
+:root {
+  --bg-color: #fff;
+  --text-color: #000;
+  --primary-color: #5259f6;
+  --border-radius: 5px;
+  --border-color: #e6e6e6;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f1f1f1;
+  color: var(--text-color);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+pre {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+img {
+  padding: 5px;
+  display: block;
+  max-width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+button {
+  min-width: 50px;
+  min-height: 26px;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  outline: none;
+  border-radius: 3px;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+textarea {
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border-color: var(--border-color);
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--primary-color);
+  }
+}
+
+hr {
+  margin: 20px 0;
+  border: none;
+  border-top: 1px solid var(--border-color);
+}
+
+#app {
+  margin: 0 auto;
+  width: 700px;
+}
+
+.app-title {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.card {
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: var(--border-radius);
+  background-color: var(--bg-color);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  &-header {
+    display: flex;
+    margin-bottom: 15px;
+
+    &-title {
+      padding: 0;
+    }
+    &-right {
+      margin-left: auto;
+    }
+  }
+
+  .sub-title {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #999;
+  }
+
+  .remark {
+    color: red;
+    font-size: 12px;
+  }
+}
+
+.answer {
+  max-height: 500px;
+  overflow: auto;
+}
+
+.images {
+  width: 100%;
+  padding: 5px;
+  background-color: var(--bg-color);
+  box-sizing: border-box;
+}
+
+.images img {
+  display: block;
+  margin-bottom: 5px;
+  width: 100%;
+  border-radius: var(--border-radius);
+}
+
+.images img:last-child {
+  margin-bottom: 0;
+}
